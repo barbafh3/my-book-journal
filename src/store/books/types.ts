@@ -4,7 +4,13 @@ export enum BookTypes {
   SAVE_BOOK = "@book/SAVE_BOOK",
   READING = "@book/READING",
   READ = "@book/READ",
-  NOT_READ = "@book/NOT_READ"
+  NOT_READ = "@book/NOT_READ",
+  NOT_OWNED = "@book/NOT_OWNED"
+}
+
+export enum BookRoutes {
+  MY_BOOKS = "@book/MY_BOOKS",
+  WISH_LIST = "@book/WISH_LIST"
 }
 
 export interface Book {
@@ -17,13 +23,25 @@ export interface Book {
   coverUrl?: string;
 }
 
-export interface BooksState {
+export interface MyBooksState {
   readonly list: Book[];
+}
+
+export interface WishListState {
+  readonly list: Book[];
+}
+
+export interface BooksState {
+  readonly myBooks: MyBooksState;
+  readonly wishList: WishListState;
   readonly bookId?: number;
 }
 
 export interface BookProps {
+  books?: Book[];
   book?: Book;
+  bookId?: number;
+  route?: BookRoutes;
 }
 
 export interface FetchBooksAction {
@@ -38,6 +56,7 @@ export interface SaveBookAction {
 
 export interface FetchBookByIdAction {
   type: BookTypes.FETCH_BOOK_BY_ID;
+  field: string;
   payload: number;
 }
 
@@ -50,7 +69,7 @@ export type BookActions =
 //   list: []
 // };
 
-export const initialBooksState: BooksState = {
+export const initialMyBooksState: MyBooksState = {
   list: [
     {
       id: 1,
@@ -89,4 +108,32 @@ export const initialBooksState: BooksState = {
         "https://images-na.ssl-images-amazon.com/images/I/512ERYcB18L.jpg"
     }
   ]
+};
+
+export const initialWishListState: WishListState = {
+  list: [
+    {
+      id: 5,
+      name: "A Dança da Morte",
+      author: "Stephen King",
+      readingStatus: BookTypes.NOT_OWNED,
+      genre: "Thriller",
+      coverUrl:
+        "https://images-na.ssl-images-amazon.com/images/I/51dXS8weHRL.jpg"
+    },
+    {
+      id: 6,
+      name: "Crime e Castigo",
+      author: "Fiódor Dostoiévski",
+      readingStatus: BookTypes.NOT_OWNED,
+      genre: "Classic",
+      coverUrl:
+        "https://images.livrariasaraiva.com.br/imagemnet/imagem.aspx/?pro_id=6322455&qld=90&l=430&a=-1=1001120327"
+    }
+  ]
+};
+
+export const initialBooksState: BooksState = {
+  myBooks: initialMyBooksState,
+  wishList: initialWishListState
 };

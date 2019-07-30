@@ -1,7 +1,7 @@
 import {
   BookTypes,
   Book,
-  BooksState,
+  MyBooksState,
   FetchBooksAction,
   SaveBookAction,
   FetchBookByIdAction
@@ -10,7 +10,7 @@ import { Dispatch, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 
 export const fetchBooks: ActionCreator<
-  ThunkAction<Promise<any>, BooksState, null, FetchBooksAction>
+  ThunkAction<Promise<any>, MyBooksState, null, FetchBooksAction>
 > = (books: Book[]) => {
   return async (dispatch: Dispatch) => {
     return dispatch({ type: BookTypes.FETCH_BOOKS, payload: books });
@@ -18,15 +18,29 @@ export const fetchBooks: ActionCreator<
 };
 
 export const fetchBookById: ActionCreator<
-  ThunkAction<Promise<any>, BooksState, number, FetchBookByIdAction>
+  ThunkAction<Promise<any>, MyBooksState, number, FetchBookByIdAction>
 > = (id: number) => {
   return async (dispatch: Dispatch) => {
-    return dispatch({ type: BookTypes.FETCH_BOOK_BY_ID, payload: id });
+    return dispatch({
+      type: BookTypes.FETCH_BOOK_BY_ID,
+      payload: id
+    });
+  };
+};
+
+export const clearBookId: ActionCreator<
+  ThunkAction<Promise<any>, MyBooksState, number, FetchBookByIdAction>
+> = () => {
+  return async (dispatch: Dispatch) => {
+    return dispatch({
+      type: BookTypes.FETCH_BOOK_BY_ID,
+      payload: null
+    });
   };
 };
 
 export const saveBook: ActionCreator<
-  ThunkAction<Promise<any>, BooksState, Book, SaveBookAction>
+  ThunkAction<Promise<any>, MyBooksState, Book, SaveBookAction>
 > = (book: Book) => {
   return async (dispatch: Dispatch) => {
     return dispatch({ type: BookTypes.SAVE_BOOK, payload: book });

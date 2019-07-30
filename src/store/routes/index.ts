@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
-import { RouteActions } from "./types";
+import { RouteActions, RouteState } from "./types";
 
-const reducer: Reducer<any, RouteActions> = (state = {}, action) => {
+const reducer: Reducer<RouteState, RouteActions> = (state = {}, action) => {
   switch (action.type) {
     default:
       return state;

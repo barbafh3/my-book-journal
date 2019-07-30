@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 
-import { BooksState, BookTypes, initialBooksState, BookActions } from "./types";
+import { BooksState, BookTypes, BookActions, initialBooksState } from "./types";
 
 const reducer: Reducer<BooksState, BookActions> = (
   state = initialBooksState,

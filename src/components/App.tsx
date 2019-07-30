@@ -6,6 +6,7 @@ import { Container } from "semantic-ui-react";
 import Header from "./header";
 import history from "../history";
 import MyBooks from "./books/MyBooks";
+import WishList from "./books/WishList";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const App: React.FC = () => {
       <Router history={history}>
         <Header />
         <Route path="/my-books" component={MyBooks} />
-        {/* <Route path="/wish-list" component={WishList} /> */}
+        <Route path="/wish-list" component={WishList} />
       </Router>
     </Container>
   );

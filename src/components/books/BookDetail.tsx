@@ -13,6 +13,8 @@ const BookDetail: React.FC<BookProps> = props => {
         return "Reading";
       case BookTypes.NOT_READ:
         return "Not read";
+      case BookTypes.NOT_OWNED:
+        return "Not Owned";
     }
   };
 
@@ -28,6 +30,8 @@ const BookDetail: React.FC<BookProps> = props => {
       case BookTypes.NOT_READ:
         style.color = "red";
         break;
+      default:
+        style.color = "grey";
     }
     return style;
   };
@@ -53,7 +57,9 @@ const BookDetail: React.FC<BookProps> = props => {
         </Item.Group>
       );
     } else {
-      return <div>Select a Book</div>;
+      return (
+        <div>Select a book on the list to the left to show its details</div>
+      );
     }
   };
 

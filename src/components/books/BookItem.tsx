@@ -1,13 +1,18 @@
 import React from "react";
-import { Book, BookProps, BookTypes } from "../../store/books/types";
+import {
+  Book,
+  BookProps,
+  BookTypes,
+  BookRoutes
+} from "../../store/books/types";
 import { List, Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { fetchBookById } from "../../store/books/actions";
 
 const BookItem: React.FC<BookProps> = props => {
   const dispatch = useDispatch();
-
   const book = props.book as Book;
+  const route = props.route as BookRoutes;
 
   const getColor: any = () => {
     switch (book.readingStatus) {
@@ -31,24 +36,33 @@ const BookItem: React.FC<BookProps> = props => {
     }
   };
 
+  const renderIcon = () => {
+    if (route === BookRoutes.MY_BOOKS) {
+      return (
+        <List.Content floated="right">
+          <Icon color={getColor()} name={getIcon()} />
+        </List.Content>
+      );
+    }
+  };
+
   const handleClick = async () => {
-    await dispatch(fetchBookById(book.id));
+    await dispatch(fetchBookById(book.id, route));
   };
 
   return (
-    <List.Item as="a" onClick={handleClick}>
+    <List.Item key={book.id} as="a" onClick={handleClick}>
       <img
         className="ui mini image"
+        style={{ maxHeight: "50px" }}
         alt="book-icon"
-        src="https://image.flaticon.com/icons/png/512/130/130304.png"
+        src={book.coverUrl}
       />
       <div className="content">
         <div className="header">{book.name}</div>
         <div className="description">{book.author}</div>
       </div>
-      <List.Content floated="right">
-        <Icon color={getColor()} name={getIcon()} />
-      </List.Content>
+      {renderIcon()}
     </List.Item>
   );
 };

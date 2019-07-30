@@ -2,20 +2,22 @@ import { combineReducers, createStore, Store, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-import { BooksState } from "./books/types";
 import booksReducer from "./books";
 import routesReducer from "./routes";
-
-export interface ApplicationState {
-  bookState: BooksState;
-}
+import { BooksState } from "./books/types";
+import { RouteState } from "./routes/types";
 
 const combinedReducers = combineReducers({
-  bookState: booksReducer,
-  routeState: routesReducer
+  books: booksReducer,
+  routes: routesReducer
 });
 
-const store: Store<ApplicationState> = createStore(
+export interface AppState {
+  readonly books: BooksState;
+  readonly routes: RouteState;
+}
+
+const store: Store<AppState> = createStore(
   combinedReducers,
   composeWithDevTools(applyMiddleware(thunk))
 );
