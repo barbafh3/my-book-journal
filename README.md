@@ -4,5 +4,5 @@ Provides a way to keep track of your books, with information about them, which o
 
 ## Goals
 
-* Learn how to work with React, Redux using Typescript instead of javascript
+* Learn how to work with React and Redux using Typescript instead of javascript
 * Improve UI design
