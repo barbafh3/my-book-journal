@@ -1,10 +1,12 @@
 import React from "react";
 import { Item, Container } from "semantic-ui-react";
-import { BookProps, Book, BookTypes } from "../../store/books/types";
+import { Book, BookTypes } from "../../store/books/types";
 
-const BookDetail: React.FC<BookProps> = props => {
-  const book = props.book as Book;
+interface OwnProps {
+  book: Book;
+}
 
+const BookDetail: React.FC<OwnProps> = ({ book }) => {
   const getReadingStatus = () => {
     switch (book.readingStatus) {
       case BookTypes.READ:

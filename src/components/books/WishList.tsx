@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../store";
-import { BookRoutes } from "../../store/books/types";
-import { clearBookId } from "../../store/books/actions";
+import { clearBookId, fetchBooks } from "../../store/books/actions";
 import BookList from "./BookList";
+import { BookRoutes } from "../../store/books/types";
 
 const WishList: React.FC = () => {
   const dispatch = useDispatch();
-  const books = useSelector((state: AppState) => state.books.wishList.list);
+  const books = useSelector((state: AppState) => state.books.list);
+
+  useEffect(() => {
+    dispatch(fetchBooks(BookRoutes.WISH_LIST));
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -17,7 +21,7 @@ const WishList: React.FC = () => {
 
   return (
     <>
-      <BookList books={books} route={BookRoutes.WISH_LIST} />
+      <BookList books={books} />
     </>
   );
 };

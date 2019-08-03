@@ -7,6 +7,7 @@ import Header from "./header";
 import history from "../history";
 import MyBooks from "./books/MyBooks";
 import WishList from "./books/WishList";
+import Search from "./books/Search";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Header />
         <Route path="/my-books" component={MyBooks} />
         <Route path="/wish-list" component={WishList} />
+        <Route path="/search" component={Search} />
       </Router>
     </Container>
   );

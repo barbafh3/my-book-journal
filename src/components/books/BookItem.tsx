@@ -1,18 +1,17 @@
 import React from "react";
-import {
-  Book,
-  BookProps,
-  BookTypes,
-  BookRoutes
-} from "../../store/books/types";
+import { Book, BookTypes, BookRoutes } from "../../store/books/types";
 import { List, Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { fetchBookById } from "../../store/books/actions";
+import { AppRoutes } from "../../store/routes/types";
 
-const BookItem: React.FC<BookProps> = props => {
+interface OwnProps {
+  book: Book;
+  route: AppRoutes;
+}
+
+const BookItem: React.FC<OwnProps> = ({ book, route }) => {
   const dispatch = useDispatch();
-  const book = props.book as Book;
-  const route = props.route as BookRoutes;
 
   const getColor: any = () => {
     switch (book.readingStatus) {
@@ -51,17 +50,17 @@ const BookItem: React.FC<BookProps> = props => {
   };
 
   return (
-    <List.Item key={book.id} as="a" onClick={handleClick}>
+    <List.Item as="a" key={book.id} onClick={handleClick}>
       <img
         className="ui mini image"
         style={{ maxHeight: "50px" }}
         alt="book-icon"
         src={book.coverUrl}
       />
-      <div className="content">
-        <div className="header">{book.name}</div>
-        <div className="description">{book.author}</div>
-      </div>
+      <List.Content>
+        <List.Header>{book.name}</List.Header>
+        <List.Description>{book.author}</List.Description>
+      </List.Content>
       {renderIcon()}
     </List.Item>
   );

@@ -7,6 +7,16 @@ const reducer: Reducer<BooksState, BookActions> = (
   action
 ) => {
   switch (action.type) {
+    case BookTypes.CLEAR_RESULTS:
+      return {
+        ...state,
+        searchResults: action.payload
+      };
+    case BookTypes.DO_BOOK_SEARCH:
+      return {
+        ...state,
+        searchResults: action.payload.docs
+      };
     case BookTypes.FETCH_BOOK_BY_ID:
       return {
         ...state,
