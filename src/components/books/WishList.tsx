@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { AppState } from "../../store";
 import { clearBookId, fetchBooks } from "../../store/books/actions";
 import BookList from "./BookList";
@@ -11,7 +12,7 @@ const WishList: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchBooks(BookRoutes.WISH_LIST));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     return () => {

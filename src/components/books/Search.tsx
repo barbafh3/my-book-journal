@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import { clearResults } from "../../store/books/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { List } from "semantic-ui-react";
+
+import { clearResults } from "../../store/books/actions";
 import { AppState } from "../../store";
 import { Book } from "../../store/books/types";
-import { List } from "semantic-ui-react";
+import SearchResultItem from "./SearchResultItem";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const Search = () => {
     return () => {
       dispatch(clearResults());
     };
-  }, []);
+  }, [dispatch]);
 
   const renderResults = () => {
     if (results && results.length > 0) {
@@ -23,22 +25,11 @@ const Search = () => {
         <>
           {results.map((item: any, index: number) => {
             let book: Book = {
+              id: item.id_librarything as number,
               name: item.title,
-              author: "teste"
+              author: item.author_name as string
             };
-            console.log(book.name);
-            return (
-              <>
-                <List.Item>
-                  <List.Content>
-                    <List.Header>
-                      {index} - {book.name}
-                    </List.Header>
-                    <List.Description>{book.author}</List.Description>
-                  </List.Content>
-                </List.Item>
-              </>
-            );
+            return <SearchResultItem book={book} key={book.id + "" + index} />;
           })}
         </>
       );

@@ -34,6 +34,7 @@ export const doBookSearch: ActionCreator<
       if (index < words.length - 1) {
         url += "+";
       }
+      return 0;
     });
     const response = await BookApi.search(url);
     history.push(BookRoutes.SEARCH);

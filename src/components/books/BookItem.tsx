@@ -1,5 +1,5 @@
 import React from "react";
-import { Book, BookTypes, BookRoutes } from "../../store/books/types";
+import { BookTypes, BookRoutes, Book } from "../../store/books/types";
 import { List, Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { fetchBookById } from "../../store/books/actions";
